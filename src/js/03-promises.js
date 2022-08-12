@@ -22,7 +22,6 @@ const onSubmit = e => {
         Notiflix.Notify.failure(error, optios);
       });
   }
-  console.log(formValues);
 };
 
 function createPromise(position, delay) {
