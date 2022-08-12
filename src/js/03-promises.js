@@ -6,13 +6,12 @@ const optios = {
   clickToClose: true,
 };
 
-
-
 const onSubmit = e => {
   e.preventDefault();
   const formData = new FormData(form);
   const formValues = Object.fromEntries(formData.entries());
   const { delay, step, amount } = formValues;
+  form.reset();
   for (let i = 0; i < Number(amount); i++) {
     const updatedDelay = Number(delay) + Number(step) * i;
     createPromise(i + 1, updatedDelay)
