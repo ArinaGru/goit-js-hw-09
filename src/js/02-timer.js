@@ -4,6 +4,7 @@ import Notiflix from 'notiflix';
 import 'flatpickr/dist/flatpickr.min.css';
 // ---------------------REFS---------------
 const refs = {
+  input: document.querySelector('#datetime-picker'),
   timer: document.querySelector('.timer'),
   days: document.querySelector('[data-days]'),
   hours: document.querySelector('[data-hours]'),
@@ -17,6 +18,7 @@ const refs = {
 let selectedDate;
 let intervalId = null;
 refs.btnStart.disabled = true;
+refs.input.disabled = false;
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -70,9 +72,12 @@ function convertMs(ms) {
 }
 const timer = targetDate => {
   intervalId = setInterval(() => {
+    refs.btnStart.disabled = true;
+    refs.input.disabled = true;
     const delta = new Date(targetDate) - new Date();
     if (delta <= 0) {
       clearInterval(intervalId);
+      refs.input.disabled = false;
       return;
     }
 
@@ -92,4 +97,3 @@ refs.btnStart.addEventListener('click', () => {
   }
   timer(selectedDate);
 });
-
